@@ -28,8 +28,8 @@
         { state: 2, value: '正在关闭连接' },
         { state: 3, value: '已关闭连接' },
     ]
-    let Sender='songrui'
-    let Receiver='liyv'
+    let Sender='宋睿'
+    let Receiver='李钰'
     /**
      *   建立连接
      *
@@ -40,7 +40,7 @@
     }
     function connect() {
         // 1. 创建websockets对象，参数为服务器websockets地址
-        websockets = new WebSocket("ws:127.0.0.1:8888/wss");
+        websockets = new WebSocket("ws:49.235.97.223:25501/wss");
         // 2.监听websocket的状态变化，接收的信息，关闭时的状态
 
         //监听连接状态的变化

@@ -52,9 +52,9 @@ func (l *WssLogic) Read(WhoAmI string) {
 		l.conn.Close()
 	}()
 	HistoryMsg := l.svcCtx.RedisClient.ZRevRangeByScore(context.Background(), WhoAmI+"get", &redis.ZRangeBy{Min: "3", Max: strconv.FormatInt(time.Now().UnixNano()+999999999999, 10), Offset: 0, Count: 10})
-	for _, Msg := range HistoryMsg.Val() {
+	for i := len(HistoryMsg.Val()); i > 0; i-- {
 		Msgformat := &types.MsgFormat{}
-		json.Unmarshal([]byte(Msg), Msgformat)
+		json.Unmarshal([]byte(HistoryMsg.Val()[i-1]), Msgformat)
 		l.conn.WriteMessage(websocket.TextMessage, []byte(Msgformat.Sender+":"+Msgformat.MsgString))
 	}
 	for {
